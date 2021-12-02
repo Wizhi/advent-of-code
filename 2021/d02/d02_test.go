@@ -27,6 +27,27 @@ func TestPartA(t *testing.T) {
 	}
 }
 
+func TestPartB(t *testing.T) {
+	tests := []struct {
+		name         string
+		instructions []string
+		expected     int
+	}{
+		{"sample", []string{"forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2"}, 900},
+		{"puzzle", puzzleInput(), 1340836560},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := PartB(test.instructions)
+
+			if result != test.expected {
+				t.Errorf("expected %d, got %d", test.expected, result)
+			}
+		})
+	}
+}
+
 func puzzleInput() []string {
 	file, _ := os.ReadFile("input")
 	lines := strings.Split(string(file), "\n")
